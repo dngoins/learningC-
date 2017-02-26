@@ -146,6 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="debug.h" />
+    <ClInclude Include="HandleStrings.h" />
+    <ClInclude Include="Implements.h" />
     <ClInclude Include="Precompiled.h" />
   </ItemGroup>
   <ItemGroup>
