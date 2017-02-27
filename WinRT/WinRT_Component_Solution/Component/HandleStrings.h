@@ -1,5 +1,6 @@
 #pragma once
 
+#include "debug.h"
 #include <type_traits>
 
 template <typename Traits>
@@ -202,7 +203,7 @@ String Format(wchar_t const * format, Args ... args)
 	// this is undefined but works in VS.NEt
 	int const size = swprintf(nullptr, 0, format, args ...);
 
-	if(-1 == size)
+	if (-1 == size)
 	{
 		throw ComException(E_INVALIDARG);
 	}
@@ -232,3 +233,40 @@ String Format(wchar_t const * format, Args ... args)
 	return result;
 
 }
+
+class StringReference
+{
+	HSTRING m_string;
+	HSTRING_HEADER m_header;
+
+public:
+
+	StringReference(StringReference const &) = delete;
+	StringReference & operator= (StringReference const &) = delete;
+	void * operator new(std::size_t) = delete;
+	void * operator new[](std::size_t) = delete;
+	void operator delete(void *) = delete;
+	void operator delete[](void *) = delete;
+
+	StringReference(wchar_t const * const value,
+		unsigned length)
+	{
+		HR(WindowsCreateStringReference(value,
+			length,
+			&m_header,
+			&m_string));
+
+	}
+
+	template <unsigned Count>
+	StringReference(wchar_t const (&value)[Count]) :
+		StringReference(value, Count - 1)
+	{
+
+	}
+
+	HSTRING Get() const noexcept
+	{
+		return m_string;
+	}
+};

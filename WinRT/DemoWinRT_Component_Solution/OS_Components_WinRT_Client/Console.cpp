@@ -15,4 +15,19 @@ int main()
 
 	StringReference s(RuntimeClass_Windows_Globalization_Calendar);
 
+	ComPtr<IInspectable> inspectable;
+	HR(RoActivateInstance(s.Get(),
+		inspectable.GetAddressOf()));
+
+	ComPtr<ICalendar> calendar;
+	HR(inspectable.As(&calendar));
+
+	int year = 0;
+	HR(calendar->get_Year(&year));
+	
+	String month;
+	HR(calendar->MonthAsFullSoloString(month.GetAddressOf()));
+
+	TRACEW(Buffer(month));
+
 }
