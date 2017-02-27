@@ -26,8 +26,14 @@ namespace UWP_CS_Client
         {
             this.InitializeComponent();
 
+            var layers = Component.Hen.Layers;
+
             Component.Hen oHen = new Component.Hen();
             oHen.Cluck();
+
+            // new Constructor
+            Component.Hen oHen2 = new Component.Hen(12);
+           
 
         }
     }

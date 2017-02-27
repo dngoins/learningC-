@@ -10,9 +10,12 @@
 
 static long s_serverLock;
 
-struct Hen : Implements<ABI::Component::IHen>
+struct Hen : Implements<ABI::Component::IHen, ABI::Component::ILayer>
 {
-	Hen() noexcept
+	int m_eggs = 0;
+
+	explicit Hen(int const eggs = 0) noexcept :
+	m_eggs(eggs)
 	{
 		InterlockedIncrement(&s_serverLock);
 	}
@@ -27,9 +30,16 @@ struct Hen : Implements<ABI::Component::IHen>
 	{
 		return S_OK;
 	}
+
+	HRESULT __stdcall get_Eggs(int * value) noexcept
+	{
+		*value = m_eggs;
+		return S_OK;
+	}
 };
 
-struct HenFactory : Implements<IActivationFactory>
+struct HenFactory : Implements<IActivationFactory, ABI::Component::IHenFactory,
+ABI::Component::IHenStatics>
 {
 	HenFactory() noexcept
 	{
@@ -44,9 +54,23 @@ struct HenFactory : Implements<IActivationFactory>
 
 	HRESULT __stdcall ActivateInstance(IInspectable ** instance) noexcept
 	{
-		*instance = new (std::nothrow) Hen;
+		*instance =  static_cast<ABI::Component::IHen *>(new (std::nothrow) Hen);
 
 		return *instance ? S_OK : E_OUTOFMEMORY;
+	}
+
+	HRESULT __stdcall CreateHen(
+		int eggs,
+		ABI::Component::IHen ** instance) noexcept
+	{
+		*instance = new (std::nothrow) Hen(eggs);
+		return *instance ? S_OK : E_OUTOFMEMORY;
+	}
+
+	HRESULT __stdcall get_Layers(int * value) noexcept
+	{
+		*value = 123;
+		return S_OK;
 	}
 };
 
