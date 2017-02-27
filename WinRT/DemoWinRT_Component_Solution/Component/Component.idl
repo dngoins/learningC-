@@ -1,0 +1,19 @@
+import "inspectable.idl";
+
+namespace Component
+{
+	[version(1.0)]
+	[uuid(710e2d1f-5382-498f-ba8c-33144ae16bc9)]
+	interface IHen : IInspectable
+	{
+		HRESULT Cluck();
+	}
+	
+	
+	[version(1.0)]
+	[activatable(1.0)]
+	runtimeclass Hen
+	{
+		[default] interface IHen;
+	}
+}
