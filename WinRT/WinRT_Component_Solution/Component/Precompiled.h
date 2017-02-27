@@ -3,8 +3,6 @@
 #include <windows.h>
 #include <wrl.h>
 
-#pragma comment(lib, "windowsapp") 
-
 struct ComException
 {
 	HRESULT result;
@@ -38,3 +36,4 @@ struct ComRuntime
 
 #define TRACEW OutputDebugString
 #define ASSERT _ASSERTE
+
