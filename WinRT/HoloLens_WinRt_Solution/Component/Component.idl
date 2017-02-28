@@ -1,5 +1,4 @@
 import "inspectable.idl";
-import "windows.ui.core.idl";
 
 namespace Component
 {
@@ -9,7 +8,7 @@ namespace Component
 	[uuid(710e2d1f-5382-498f-ba8c-33144ae16bc9)]
 	interface IHen : IInspectable
 	{
-		HRESULT Cluck([in] Windows.UI.Core.ICoreWindow * window);
+		HRESULT Cluck();
 	}
 
 	[version(1.0)]

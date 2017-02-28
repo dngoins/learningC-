@@ -4,9 +4,6 @@
 #include "HandleStrings.h"
 #include <activation.h>
 #include <winstring.h>
-#include <windows.ui.h>
-#include <windows.ui.core.h>
-
 #pragma comment(lib, "runtimeobject")
 
 
@@ -29,7 +26,7 @@ struct Hen : Implements<ABI::Component::IHen, ABI::Component::ILayer>
 
 	}
 
-	HRESULT __stdcall Cluck(ABI::Windows::UI::Core::ICoreWindow *) noexcept
+	HRESULT __stdcall Cluck() noexcept
 	{
 		return S_OK;
 	}

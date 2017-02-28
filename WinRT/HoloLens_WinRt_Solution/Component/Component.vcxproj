@@ -90,7 +90,6 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalUsingDirectories>C:\Program Files (x86)\Windows Kits\10\UnionMetadata</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -99,36 +98,14 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
-      <MetadataFileName>
-      </MetadataFileName>
-      <HeaderFileName>
-      </HeaderFileName>
+      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
+      <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <DefaultCharType />
-      <TypeLibraryName />
-      <IgnoreStandardIncludePath />
-      <WarningLevel />
-      <WarnAsError />
-      <SuppressStartupBanner />
-      <TargetEnvironment />
-      <GenerateTypeLibrary />
-      <ErrorCheckAllocations />
-      <ErrorCheckBounds />
-      <ErrorCheckEnumRange />
-      <ErrorCheckRefPointers />
-      <ErrorCheckStubData />
-      <AdditionalOptions>
-      </AdditionalOptions>
     </Midl>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
-    <PostBuildEvent>
-      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "c:\program files (x86)\Windows kits\10\UnionMetadata"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,7 +115,6 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;COMPONENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
-      <AdditionalUsingDirectories>C:\Program Files (x86)\Windows Kits\10\UnionMetadata</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,21 +123,11 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>
-      </HeaderFileName>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <DefaultCharType />
-      <TypeLibraryName />
-      <AdditionalOptions>
-      </AdditionalOptions>
     </Midl>
-    <PostBuildEvent>
-      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "c:\program files (x86)\Windows kits\10\UnionMetadata"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -173,7 +139,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;COMPONENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
-      <AdditionalUsingDirectories>C:\Program Files (x86)\Windows Kits\10\UnionMetadata</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -184,21 +149,11 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>
-      </HeaderFileName>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <DefaultCharType />
-      <TypeLibraryName />
-      <AdditionalOptions>
-      </AdditionalOptions>
     </Midl>
-    <PostBuildEvent>
-      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "c:\program files (x86)\Windows kits\10\UnionMetadata"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -210,7 +165,6 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;COMPONENT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
-      <AdditionalUsingDirectories>C:\Program Files (x86)\Windows Kits\10\UnionMetadata</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -221,21 +175,11 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>
-      </HeaderFileName>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <DefaultCharType />
-      <TypeLibraryName />
-      <AdditionalOptions>
-      </AdditionalOptions>
     </Midl>
-    <PostBuildEvent>
-      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "c:\program files (x86)\Windows kits\10\UnionMetadata"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Component.h" />

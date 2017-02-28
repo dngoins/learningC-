@@ -3,11 +3,11 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0620 */
-/* at Mon Jan 18 22:14:07 2038
+ /* File created by MIDL compiler version 8.00.0603 */
+/* at Mon Feb 27 01:09:55 2017
  */
-/* Compiler settings for C:\Users\dngoins\AppData\Local\Temp\Component.idl-90804fa1:
-    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.01.0620 
+/* Compiler settings for C:\Users\dngoins\AppData\Local\Temp\Component.idl-59dc6d0b:
+    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
@@ -29,7 +29,7 @@
 
 #ifndef __RPCNDR_H_VERSION__
 #error this stub requires an updated version of <rpcndr.h>
-#endif /* __RPCNDR_H_VERSION__ */
+#endif // __RPCNDR_H_VERSION__
 
 #ifndef COM_NO_WINDOWS_H
 #include "windows.h"
@@ -111,7 +111,6 @@ namespace ABI {
 
 /* header files for imported files */
 #include "inspectable.h"
-#include "windows.ui.core.h"
 
 #ifdef __cplusplus
 extern "C"{
@@ -166,8 +165,7 @@ EXTERN_C const IID IID___x_ABI_CComponent_CIHen;
             IHen : public IInspectable
             {
             public:
-                virtual HRESULT STDMETHODCALLTYPE Cluck( 
-                    /* [in] */ ABI::Windows::UI::Core::ICoreWindow *window) = 0;
+                virtual HRESULT STDMETHODCALLTYPE Cluck( void) = 0;
                 
             };
 
@@ -210,8 +208,7 @@ EXTERN_C const IID IID___x_ABI_CComponent_CIHen;
             /* [out] */ TrustLevel *trustLevel);
         
         HRESULT ( STDMETHODCALLTYPE *Cluck )( 
-            __x_ABI_CComponent_CIHen * This,
-            /* [in] */ __x_ABI_CWindows_CUI_CCore_CICoreWindow *window);
+            __x_ABI_CComponent_CIHen * This);
         
         END_INTERFACE
     } __x_ABI_CComponent_CIHenVtbl;
@@ -246,8 +243,8 @@ EXTERN_C const IID IID___x_ABI_CComponent_CIHen;
     ( (This)->lpVtbl -> GetTrustLevel(This,trustLevel) ) 
 
 
-#define __x_ABI_CComponent_CIHen_Cluck(This,window)	\
-    ( (This)->lpVtbl -> Cluck(This,window) ) 
+#define __x_ABI_CComponent_CIHen_Cluck(This)	\
+    ( (This)->lpVtbl -> Cluck(This) ) 
 
 #endif /* COBJMACROS */
 
