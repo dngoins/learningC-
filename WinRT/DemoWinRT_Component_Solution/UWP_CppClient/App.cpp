@@ -5,7 +5,10 @@
 #include "HandleStrings.h"
 #include <Windows.ApplicationModel.h>
 #include <Windows.ApplicationModel.core.h>
+#include <windows.ui.core.h>
+
 #include "Implements.h"
+#include "..\Component\Component.h"
 
 #pragma comment(lib, "runtimeobject")
 
@@ -13,6 +16,7 @@ using Microsoft::WRL::ComPtr;
 
 using namespace ABI::Windows::ApplicationModel::Core;
 using namespace ABI::Windows::UI::Core;
+using namespace ABI::Component;
 
 template <typename Interface, unsigned Count>
 ComPtr<Interface> GetActivationFactory(wchar_t const (&name)[Count])
@@ -75,6 +79,7 @@ ComPtr<Interface> ActivateInstance(wchar_t const (&name)[Count])
 class App : public Implements<IFrameworkViewSource, IFrameworkView>
 {
 	ComPtr<ICoreWindow> m_window;
+	
 
 public:
 	virtual HRESULT __stdcall CreateView(IFrameworkView ** view) noexcept override
@@ -92,6 +97,23 @@ public:
 
 	virtual HRESULT __stdcall Run() noexcept override
 	{
+		ComPtr<IHen> hen;
+		ComPtr<IHenFactory> factory = GetActivationFactory<IHenFactory>
+			(RuntimeClass_Component_Hen);
+		HR(factory->CreateHen(123, hen.GetAddressOf()));
+		
+		//intt layers = HEN::Layers()
+		//ComPtr<IHenStatics> statics =
+		//GetActivationFactory<IHenStatics>(L"Component.Hen");
+
+		//intt layers = HEN::Layers()
+
+		ComPtr<IHenStatics> statics;
+		HR(factory.As(&statics));
+
+		int layers = 0;
+		HR(statics->get_Layers(&layers));
+
 		HRESULT hr = m_window->Activate();
 		if (hr != S_OK)
 		{
@@ -103,6 +125,8 @@ public:
 
 		if (hr != S_OK)
 			return hr;
+
+		HR(hen->Cluck(m_window.Get()));
 
 		return dispatcher->ProcessEvents(CoreProcessEventsOption_ProcessUntilQuit);
 	}
@@ -123,8 +147,7 @@ public:
 	}
 };
 
-#include "..\Component\Component.h"
-using namespace ABI::Component;
+
 
 int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
 {
@@ -136,27 +159,10 @@ int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
 	
 	//Hen h(123);
 
-	ComPtr<IHenFactory> factory = GetActivationFactory<IHenFactory>
-		(RuntimeClass_Component_Hen);
-
-	ComPtr<IHen> hen;
-
-	HR(factory->CreateHen(123, hen.GetAddressOf()));
-
-
-	//intt layers = HEN::Layers()
-	//ComPtr<IHenStatics> statics =
-	//GetActivationFactory<IHenStatics>(L"Component.Hen");
-
-	//intt layers = HEN::Layers()
-
-	ComPtr<IHenStatics> statics;
-	HR(factory.As(&statics));
-
-	int layers = 0;
-	HR(statics->get_Layers(&layers));
-
-
+	
 	HR(app->Run(source.Get()));
+
+	
+
 
 }

@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace UWP_CS_Client
+namespace CS_UWPClient
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -76,6 +76,11 @@ namespace UWP_CS_Client
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+
+                Component.Hen ohen = new Component.Hen(12);
+
+                ohen.Cluck(Window.Current.CoreWindow);
+
             }
         }
 

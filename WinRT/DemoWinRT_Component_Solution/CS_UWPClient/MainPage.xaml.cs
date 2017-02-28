@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace UWP_CS_Client
+namespace CS_UWPClient
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -25,16 +25,6 @@ namespace UWP_CS_Client
         public MainPage()
         {
             this.InitializeComponent();
-
-            var layers = Component.Hen.Layers;
-
-            Component.Hen oHen = new Component.Hen();
-            oHen.Cluck();
-
-            // new Constructor
-            Component.Hen oHen2 = new Component.Hen(12);
-           
-
         }
     }
 }

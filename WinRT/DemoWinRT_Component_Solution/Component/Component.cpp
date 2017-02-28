@@ -31,6 +31,7 @@ struct Hen : Implements<ABI::Component::IHen, ABI::Component::ILayer>
 
 	HRESULT __stdcall Cluck(ABI::Windows::UI::Core::ICoreWindow *) noexcept
 	{
+		TRACEW(L"Clucking from C++ \n");
 		return S_OK;
 	}
 
