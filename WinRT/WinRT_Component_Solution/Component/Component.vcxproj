@@ -22,7 +22,7 @@
     <ProjectGuid>{05C81A11-36CC-45CA-875C-6CA6AC690ABE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Component</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,11 +97,15 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <HeaderFileName>
+      </HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
     </Midl>
+    <PostBuildEvent>
+      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "$(WindowsSDKDir)\UnionMetadata"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -119,11 +123,15 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <HeaderFileName>
+      </HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
     </Midl>
+    <PostBuildEvent>
+      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "$(WindowsSDKDir)\UnionMetadata"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -145,11 +153,15 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <HeaderFileName>
+      </HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
     </Midl>
+    <PostBuildEvent>
+      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "$(WindowsSDKDir)\UnionMetadata"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -171,11 +183,15 @@
     </Link>
     <Midl>
       <EnableWindowsRuntime>true</EnableWindowsRuntime>
-      <AdditionalMetadataDirectories>$(TargetPlatformWinMDLocation)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataFoundationPath)</AdditionalMetadataDirectories>
       <MetadataFileName>$(OutDir)%(Filename).winmd</MetadataFileName>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <HeaderFileName>
+      </HeaderFileName>
       <PrependWithABINamepsace>true</PrependWithABINamepsace>
     </Midl>
+    <PostBuildEvent>
+      <Command>mdmerge /i $(ProjectDir) /o $(OutputPath) /partial /metadata_dir "$(WindowsSDKDir)\UnionMetadata"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="debug.h" />
