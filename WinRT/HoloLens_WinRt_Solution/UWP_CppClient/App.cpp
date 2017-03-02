@@ -6,6 +6,10 @@
 #include <Windows.ApplicationModel.h>
 #include <Windows.ApplicationModel.core.h>
 #include "Implements.h"
+#include <set>
+#include <memory>
+#include <vector>
+
 
 #include "..\Component\Component.h"
 
@@ -78,8 +82,24 @@ ComPtr<Interface> ActivateInstance(wchar_t const (&name)[Count])
 
 class App : public Implements<IFrameworkViewSource, IFrameworkView>
 {
+
+	using IGenericCluckHandler = ABI::Windows::Foundation::ITypedEventHandler<ABI::Component::Hen *, int>;
+	using IAggGenericCluckHandler = ABI::Windows::Foundation::ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<Hen *, IHen *>, int>;
+
+	struct HenHandler : Implements<IGenericCluckHandler>
+	{
+		virtual HRESULT __stdcall Invoke(IHen *, int) noexcept override
+		{
+			return S_OK;
+		}
+	};
+
+
+	//EventHandler<IGenericCluckHandler> m_genericClucked;
+
 	ComPtr<ICoreWindow> m_window;
 
+	
 public:
 	virtual HRESULT __stdcall CreateView(IFrameworkView ** view) noexcept override
 	{
@@ -128,8 +148,14 @@ public:
 		int layers = 0;
 		HR(statics->get_Layers(&layers));
 
-		
+//		ComPtr<__FITypedEventHandler_2_Component__CHen_int> handler = GetActivationFactory<__FITypedEventHandler_2_Component__CHen_int>
+	//		(L"Windows.Foundation.TypedEventHandler`2<Component.Hen, Int32>");
+		//HenHandler handler;
+		EventRegistrationToken token;
+		HenHandler handler;
 
+		hen->add_GenericClucked((__FITypedEventHandler_2_Component__CHen_int*)&handler, &token);
+		
 		return dispatcher->ProcessEvents(CoreProcessEventsOption_ProcessUntilQuit);
 	}
 
