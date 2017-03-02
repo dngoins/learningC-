@@ -7,12 +7,16 @@
 #include <Windows.ApplicationModel.core.h>
 #include "Implements.h"
 
+#include "..\Component\Component.h"
+
 #pragma comment(lib, "runtimeobject")
 
 using Microsoft::WRL::ComPtr;
 
 using namespace ABI::Windows::ApplicationModel::Core;
 using namespace ABI::Windows::UI::Core;
+using namespace ABI::Component;
+
 
 template <typename Interface, unsigned Count>
 ComPtr<Interface> GetActivationFactory(wchar_t const (&name)[Count])
@@ -104,11 +108,34 @@ public:
 		if (hr != S_OK)
 			return hr;
 
+		ComPtr<IHenFactory> factory = GetActivationFactory<IHenFactory>
+			(RuntimeClass_Component_Hen);
+
+		ComPtr<IHen> hen;
+
+		HR(factory->CreateHen(123, hen.GetAddressOf()));
+
+
+		//intt layers = HEN::Layers()
+		//ComPtr<IHenStatics> statics =
+		//GetActivationFactory<IHenStatics>(L"Component.Hen");
+
+		//intt layers = HEN::Layers()
+
+		ComPtr<IHenStatics> statics;
+		HR(factory.As(&statics));
+
+		int layers = 0;
+		HR(statics->get_Layers(&layers));
+
+		
+
 		return dispatcher->ProcessEvents(CoreProcessEventsOption_ProcessUntilQuit);
 	}
 
-	virtual HRESULT __stdcall Initialize(ICoreApplicationView *) noexcept override
+	virtual HRESULT __stdcall Initialize(ICoreApplicationView * appView) noexcept override
 	{
+		
 		return S_OK;
 	}
 
@@ -123,8 +150,6 @@ public:
 	}
 };
 
-#include "..\Component\Component.h"
-using namespace ABI::Component;
 
 int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
 {
@@ -134,29 +159,6 @@ int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
 	ComPtr<IFrameworkViewSource> source;
 	source.Attach(new App);
 	
-	//Hen h(123);
-
-	ComPtr<IHenFactory> factory = GetActivationFactory<IHenFactory>
-		(RuntimeClass_Component_Hen);
-
-	ComPtr<IHen> hen;
-
-	HR(factory->CreateHen(123, hen.GetAddressOf()));
-
-
-	//intt layers = HEN::Layers()
-	//ComPtr<IHenStatics> statics =
-	//GetActivationFactory<IHenStatics>(L"Component.Hen");
-
-	//intt layers = HEN::Layers()
-
-	ComPtr<IHenStatics> statics;
-	HR(factory.As(&statics));
-
-	int layers = 0;
-	HR(statics->get_Layers(&layers));
-
-
 	HR(app->Run(source.Get()));
 
 }

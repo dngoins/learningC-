@@ -1,14 +1,46 @@
 import "inspectable.idl";
+import "windows.ui.core.idl";
+import "eventtoken.idl";
 
 namespace Component
 {
 	runtimeclass Hen;
 
 	[version(1.0)]
+	[uuid(2b4fca62-b5a5-4d25-aa5d-6ed74ea97ece)]
+	delegate HRESULT CluckHandler( 
+		[in] Hen * sender,
+		[in] int args);
+
+
+	[version(1.0)]
 	[uuid(710e2d1f-5382-498f-ba8c-33144ae16bc9)]
 	interface IHen : IInspectable
 	{
-		HRESULT Cluck();
+		HRESULT Cluck([in] CluckHandler * handler);
+		
+		HRESULT Clucking();
+		//must be a matching pair 
+		//token is just a 64bit number defined by idl
+		[eventadd] HRESULT Clucked(
+			[in] CluckHandler * handler,
+			[out, retval] EventRegistrationToken * token);
+		[eventremove] HRESULT Clucked([in] EventRegistrationToken token);
+
+		//using Generic typeHandler
+		//must be a matching pair 
+		//token is just a 64bit number defined by idl
+		[eventadd] HRESULT GenericClucked(
+			[in] Windows.Foundation.TypedEventHandler<Hen *, int> * handler,
+			[out, retval] EventRegistrationToken * token);
+		[eventremove] HRESULT GenericClucked([in] EventRegistrationToken token);
+
+
+		//Generic Collections and Iterators
+		//IVectorView - readonly vector
+		//IVector - full fledge
+		[propget] HRESULT Brood([out, retval] Windows.Foundation.Collections.IVectorView<HSTRING> ** brood);
+
 	}
 
 	[version(1.0)]

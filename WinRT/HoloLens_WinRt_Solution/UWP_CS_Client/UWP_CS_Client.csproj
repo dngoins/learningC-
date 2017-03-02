@@ -127,7 +127,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Component">
+    <Reference Include="Component, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Debug\Component.winmd</HintPath>
     </Reference>
   </ItemGroup>

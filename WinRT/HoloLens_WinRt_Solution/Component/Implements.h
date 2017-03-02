@@ -21,7 +21,7 @@ class __declspec(novtable) Implements : public Interfaces ...
 	struct IsCloaked<Cloaked<T>> : std::true_type {};
 
 	template <int = 0>
-	void * QueryInterface(GUID const & id) noexcept
+	void * QueryInterface(GUID const & ) noexcept
 	{
 		return nullptr;
 	}
