@@ -5,6 +5,9 @@
 #include "HandleStrings.h"
 #include <Windows.ApplicationModel.h>
 #include <Windows.ApplicationModel.core.h>
+#include <Windows.Applicationmodel.Activation.h>
+#include <windows.graphics.holographic.h>
+
 #include "Implements.h"
 #include <set>
 #include <memory>
@@ -20,6 +23,10 @@ using Microsoft::WRL::ComPtr;
 using namespace ABI::Windows::ApplicationModel::Core;
 using namespace ABI::Windows::UI::Core;
 using namespace ABI::Component;
+using namespace ABI::Windows::ApplicationModel::Activation;
+using namespace ABI::Windows::Graphics;
+using namespace ABI::Windows::Graphics::Holographic;
+
 
 
 template <typename Interface, unsigned Count>
@@ -85,10 +92,17 @@ class App : public Implements<IFrameworkViewSource, IFrameworkView>
 
 	using IGenericCluckHandler = ABI::Windows::Foundation::ITypedEventHandler<ABI::Component::Hen *, int>;
 	using IAggGenericCluckHandler = ABI::Windows::Foundation::ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<Hen *, IHen *>, int>;
+	using IActivatedHandler = ABI::Windows::Foundation::ITypedEventHandler<ABI::Windows::ApplicationModel::Core::ICoreApplicationView *, ABI::Windows::ApplicationModel::Activation::IActivatedEventArgs *>;
 
-	struct HenHandler : Implements<IGenericCluckHandler>
+	struct HenHandler : Implements<IGenericCluckHandler,
+	IActivatedHandler>
 	{
 		virtual HRESULT __stdcall Invoke(IHen *, int) noexcept override
+		{
+			return S_OK;
+		}
+
+		virtual HRESULT __stdcall Invoke(ICoreApplicationView *, IActivatedEventArgs *)
 		{
 			return S_OK;
 		}
@@ -98,6 +112,7 @@ class App : public Implements<IFrameworkViewSource, IFrameworkView>
 	//EventHandler<IGenericCluckHandler> m_genericClucked;
 
 	ComPtr<ICoreWindow> m_window;
+	ComPtr<IHolographicSpace> m_holographicSpace;
 
 	
 public:
@@ -111,6 +126,12 @@ public:
 	virtual HRESULT __stdcall SetWindow(ICoreWindow * window) noexcept override
 	{
 		m_window = window;
+
+		// create the Holographic Space
+		auto hspaceStatics = GetActivationFactory<IHolographicSpaceStatics>(L"Windows.Graphics.Holographic.IHolographicSpaceStatics");
+		HR(hspaceStatics->CreateForCoreWindow(m_window.Get(), m_holographicSpace.GetAddressOf()));
+
+
 		return S_OK;
 	}
 
@@ -161,7 +182,10 @@ public:
 
 	virtual HRESULT __stdcall Initialize(ICoreApplicationView * appView) noexcept override
 	{
-		
+		HenHandler handler;
+		EventRegistrationToken token;
+		appView->add_Activated((__FITypedEventHandler_2_Windows__CApplicationModel__CCore__CCoreApplicationView_Windows__CApplicationModel__CActivation__CIActivatedEventArgs *)&handler, &token);
+
 		return S_OK;
 	}
 
