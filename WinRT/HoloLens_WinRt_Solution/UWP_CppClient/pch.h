@@ -6,6 +6,7 @@
 #pragma once
 
 #include <collection.h>
+//#include "windows.foundation.collections.h"
 #include <ppltasks.h>
 
 
